@@ -1,1 +1,1 @@
-it's not finished yet
+IT'S ALPHA
