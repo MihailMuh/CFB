@@ -10,13 +10,18 @@ class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN |
                                               pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED, vsync=True)
+        self.clock = pygame.time.Clock()
 
         self.all_sprites = pygame.sprite.Group()
-        self.font = None
         self.background_screen = None
         self.button = None
 
+        self.font = None
+        self.fps_font = Font(self.screen, 30, "", SCREEN_WIDTH - 200, 50,
+                             pygame.Color('red'))
+
         self.running = True
+        self.draw_fps = True
         self.game_status = PASS
 
     def start_screen(self):
@@ -25,7 +30,8 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    system.terminate()
+                    self.running = False
+                    break
                 else:
                     self.generate_game()
 
@@ -36,7 +42,8 @@ class Game:
                 self.button.click(pos[0], pos[1])
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    system.terminate()
+                    self.running = False
+                    break
 
     def generate_menu(self):
         self.font = Font(self.screen, 70, "Для продолжения нажмите любую клавишу", HALF_SCREEN_WIDTH,
@@ -50,6 +57,8 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.button = Button(HALF_SCREEN_WIDTH, HALF_SCREEN_HEIGHT)
         self.all_sprites.add(self.button)
+
+        self.font = None
 
         self.background_screen = load_image("game_screen.jpg", (SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -66,7 +75,14 @@ class Game:
 
             self.all_sprites.draw(self.screen)
             self.all_sprites.update()
+
+            if self.draw_fps:
+                self.fps_font.render('FPS:' + str(int(self.clock.get_fps())))
+                self.clock.tick(-1)
+
             pygame.display.flip()
+
+        system.terminate()
 
 
 game = Game()
