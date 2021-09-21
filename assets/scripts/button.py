@@ -1,6 +1,6 @@
-from pygame_init import pygame
-from colors import PowderBlue
-from audio_hub import click_sound
+from .pygame_init import pygame
+from .colors import PowderBlue
+from .audio_hub import click_sound
 
 
 class Button(pygame.sprite.Sprite):

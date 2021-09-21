@@ -1,9 +1,9 @@
-import system
-from file_manager import *
-from button import Button
-from windows import *
-from font import Font
-from statuses import *
+from assets.scripts import system
+from assets.scripts.file_manager import *
+from assets.scripts.button import Button
+from assets.scripts.windows import *
+from assets.scripts.font import Font
+from assets.scripts.statuses import *
 
 
 class Game:

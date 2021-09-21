@@ -1,4 +1,4 @@
-from pygame_init import *
+from .pygame_init import *
 
 
 class Font:

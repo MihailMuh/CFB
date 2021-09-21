@@ -1,4 +1,4 @@
-from pygame_init import pygame
+from .pygame_init import pygame
 
 info = pygame.display.Info()
 

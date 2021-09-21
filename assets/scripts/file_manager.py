@@ -1,5 +1,5 @@
 import os
-from pygame_init import pygame
+from .pygame_init import pygame
 
 
 def load_image(name, size):
