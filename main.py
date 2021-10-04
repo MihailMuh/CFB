@@ -21,7 +21,7 @@ class Game:
                              pygame.Color('red'))
 
         self.running = True
-        self.draw_fps = True
+        self.draw_fps = False
         self.game_status = PASS
 
     def start_screen(self):
