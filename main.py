@@ -39,7 +39,8 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                self.button.click(pos[0], pos[1])
+                for button in self.all_sprites:
+                    button.click(pos[0], pos[1])
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
@@ -55,8 +56,16 @@ class Game:
 
     def generate_game(self):
         self.all_sprites = pygame.sprite.Group()
-        self.button = Button(HALF_SCREEN_WIDTH, HALF_SCREEN_HEIGHT)
-        self.all_sprites.add(self.button)
+        x = 10
+        y = 10
+        endX = SCREEN_WIDTH - 160
+        for i in range(118):
+            self.all_sprites.add(Button(x, y, load_image("elements/" + str(i) + ".png", (150, 80))))
+
+            x += 160
+            if x >= endX:
+                x = 10
+                y += 90
 
         self.font = None
 
