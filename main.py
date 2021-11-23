@@ -4,12 +4,13 @@ from assets.scripts.button import Button
 from assets.scripts.windows import *
 from assets.scripts.font import Font
 from assets.scripts.statuses import *
+from assets.scripts.chemical_elements import chemical_elements
 
 
 class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN |
-                                              pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SCALED, vsync=True)
+                                              pygame.HWSURFACE | pygame.DOUBLEBUF, vsync=True)
         self.clock = pygame.time.Clock()
 
         self.all_sprites = pygame.sprite.Group()
@@ -58,14 +59,20 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         x = 10
         y = 10
-        endX = SCREEN_WIDTH - 160
-        for i in range(118):
-            self.all_sprites.add(Button(x, y, load_image("elements/" + str(i) + ".png", (150, 80))))
+        width = 130
+        height = 60
+        step_x = width + x
+        step_y = height + y
+        end_x = SCREEN_WIDTH - step_x
+        keys = chemical_elements.keys()
 
-            x += 160
-            if x >= endX:
+        for k in keys:
+            self.all_sprites.add(Button(x, y, load_image("elements/" + k + ".jpg", (width, height))))
+
+            x += step_x
+            if x >= end_x:
                 x = 10
-                y += 90
+                y += step_y
 
         self.font = None
 
